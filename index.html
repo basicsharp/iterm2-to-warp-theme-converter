@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,14 +8,18 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Fira+Code:wght@400;500&display=swap"
+        rel="stylesheet">
     <style>
         body {
             font-family: 'Inter', sans-serif;
         }
+
         textarea {
             font-family: 'Fira Code', monospace;
         }
+
         a {
             /* color: #93c5fd !important; Tailwind 'blue-300' */
             text-decoration-line: underline !important;
@@ -22,17 +27,22 @@
             text-underline-offset: 3px !important;
             transition: color 0.2s ease-in-out !important;
         }
+
         a:hover {
-            color: #60a5fa; /* Tailwind 'blue-400' */
+            color: #60a5fa;
+            /* Tailwind 'blue-400' */
         }
     </style>
 </head>
+
 <body class="bg-gray-900 text-gray-200 flex flex-col min-h-screen">
     <main class="flex-grow container mx-auto p-4 sm:p-6 lg:p-8">
         <!-- Header Section -->
         <div class="text-center mb-8">
             <h1 class="text-4xl font-bold text-white">iTerm2 to Warp Theme Converter</h1>
-            <p class="mt-2 text-lg text-gray-400">Instantly convert your favorite <code class="bg-gray-700 text-sm rounded-md px-1 py-0.5">.itermcolors</code> themes to the Warp <code class="bg-gray-700 text-sm rounded-md px-1 py-0.5">.yml</code> format.</p>
+            <p class="mt-2 text-lg text-gray-400">Instantly convert your favorite <code
+                    class="bg-gray-700 text-sm rounded-md px-1 py-0.5">.itermcolors</code> themes to the Warp <code
+                    class="bg-gray-700 text-sm rounded-md px-1 py-0.5">.yml</code> format.</p>
         </div>
 
         <!-- Main Converter UI -->
@@ -41,16 +51,28 @@
                 <!-- Input Column -->
                 <div class="flex flex-col space-y-4">
                     <div class="flex justify-between items-center">
-                         <h2 class="text-xl font-semibold text-white">1. Input iTerm2 Theme</h2>
-                         <label for="file-upload" class="cursor-pointer text-sm bg-indigo-600 hover:bg-indigo-700 text-white font-medium py-2 px-4 rounded-lg transition-colors duration-200">
+                        <h2 class="text-xl font-semibold text-white">1. Input iTerm2 Theme</h2>
+                        <label for="file-upload"
+                            class="cursor-pointer text-sm bg-indigo-600 hover:bg-indigo-700 text-white font-medium py-2 px-4 rounded-lg transition-colors duration-200">
                             Upload .itermcolors
-                         </label>
-                         <input id="file-upload" type="file" class="hidden" accept=".itermcolors">
+                        </label>
+                        <input id="file-upload" type="file" class="hidden" accept=".itermcolors">
                     </div>
-                    <p class="text-sm text-gray-400">Paste your <code class="bg-gray-700 text-xs rounded-md px-1">.itermcolors</code> file content below or upload it.<br/>Grab some from <a href="https://iterm2colorschemes.com/">iterm2colorschemes.com</a></p>
-                    <textarea id="iterm-input" class="w-full h-96 flex-grow bg-gray-900 border border-gray-600 rounded-lg p-4 text-sm focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition" placeholder="Paste your .itermcolors XML content here..."></textarea>
-                    <button id="convert-btn" class="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-4 rounded-lg transition-colors duration-200 text-lg flex items-center justify-center">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2"><path d="m11 17 5-5-5-5"/><path d="m18 17 5-5-5-5"/></svg>
+                    <p class="text-sm text-gray-400">Paste your <code
+                            class="bg-gray-700 text-xs rounded-md px-1">.itermcolors</code> file content below or upload
+                        it. Supports both XML and flattened formats.<br />Grab some from <a
+                            href="https://iterm2colorschemes.com/">iterm2colorschemes.com</a></p>
+                    <textarea id="iterm-input"
+                        class="w-full h-96 flex-grow bg-gray-900 border border-gray-600 rounded-lg p-4 text-sm focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition"
+                        placeholder="Paste your .itermcolors XML content here..."></textarea>
+                    <button id="convert-btn"
+                        class="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-4 rounded-lg transition-colors duration-200 text-lg flex items-center justify-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                            class="mr-2">
+                            <path d="m11 17 5-5-5-5" />
+                            <path d="m18 17 5-5-5-5" />
+                        </svg>
                         Convert to Warp Theme
                     </button>
                 </div>
@@ -58,10 +80,24 @@
                 <!-- Output Column -->
                 <div class="flex flex-col space-y-4">
                     <h2 class="text-xl font-semibold text-white">2. Output Warp Theme</h2>
-                    <p class="text-sm text-gray-400">Your generated <code class="bg-gray-700 text-xs rounded-md px-1">.yml</code> theme. Save this as a file in your <code class="bg-gray-700 text-xs rounded-md px-1">~/.warp/themes/</code> directory.<br/>Check <a href="https://docs.warp.dev/terminal/appearance/custom-themes">Warp custom theme docs</a> for more info.</p>
-                    <textarea id="warp-output" readonly class="w-full h-96 flex-grow bg-gray-900 border border-gray-600 rounded-lg p-4 text-sm focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition" placeholder="Warp YAML output will appear here..."></textarea>
-                    <button id="copy-btn" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 px-4 rounded-lg transition-colors duration-200 text-lg flex items-center justify-center" disabled>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
+                    <p class="text-sm text-gray-400">Your generated <code
+                            class="bg-gray-700 text-xs rounded-md px-1">.yml</code> theme. Save this as a file in your
+                        <code class="bg-gray-700 text-xs rounded-md px-1">~/.warp/themes/</code> directory.<br />Check
+                        <a href="https://docs.warp.dev/terminal/appearance/custom-themes">Warp custom theme docs</a> for
+                        more info.
+                    </p>
+                    <textarea id="warp-output" readonly
+                        class="w-full h-96 flex-grow bg-gray-900 border border-gray-600 rounded-lg p-4 text-sm focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition"
+                        placeholder="Warp YAML output will appear here..."></textarea>
+                    <button id="copy-btn"
+                        class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 px-4 rounded-lg transition-colors duration-200 text-lg flex items-center justify-center"
+                        disabled>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                            class="mr-2">
+                            <rect width="14" height="14" x="8" y="8" rx="2" ry="2" />
+                            <path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2" />
+                        </svg>
                         Copy to Clipboard
                     </button>
                 </div>
@@ -75,7 +111,9 @@
             <h3 class="text-lg font-semibold text-white mb-2">How to use your new theme:</h3>
             <ol class="list-decimal list-inside inline-block text-left">
                 <li>Click "Copy to Clipboard" or manually copy the output.</li>
-                <li>Create a new file, e.g., <code class="bg-gray-700 text-xs rounded-md px-1">my-theme.yml</code>, in <code class="bg-gray-700 text-xs rounded-md px-1">~/.warp/themes/</code>.</li>
+                <li>Create a new file, e.g., <code class="bg-gray-700 text-xs rounded-md px-1">my-theme.yml</code>, in
+                    <code class="bg-gray-700 text-xs rounded-md px-1">~/.warp/themes/</code>.
+                </li>
                 <li>Paste the copied content into the new file and save.</li>
                 <li>Open Warp's settings (Cmd+,), go to Appearance, and select your new theme!</li>
             </ol>
@@ -116,23 +154,34 @@
          * @returns {string|null} The hex color string or null if parsing fails.
          */
         const getColorFromDict = (dictElement) => {
-            if (!dictElement) return null;
+            if (!dictElement || dictElement.tagName !== 'dict') return null;
+
             const keys = dictElement.getElementsByTagName('key');
             const reals = dictElement.getElementsByTagName('real');
             const color = {};
-            for (let i = 0; i < keys.length; i++) {
+
+            // Ensure we have matching pairs of keys and reals
+            const minLength = Math.min(keys.length, reals.length);
+
+            for (let i = 0; i < minLength; i++) {
+                if (!keys[i] || !reals[i]) continue;
+
                 const key = keys[i].textContent;
                 const value = reals[i].textContent;
+
+                if (!key || !value) continue;
+
                 if (key === 'Red Component') color.r = value;
                 if (key === 'Green Component') color.g = value;
                 if (key === 'Blue Component') color.b = value;
             }
+
             if (color.r !== undefined && color.g !== undefined && color.b !== undefined) {
                 return toHex(color.r, color.g, color.b);
             }
             return null;
         };
-        
+
         /**
          * Determines if a color is light or dark to set the 'details' property.
          * @param {string} hex - The hex color string.
@@ -154,7 +203,7 @@
          */
         const toYaml = (theme) => {
             return `
-# Generated by iTerm2 to Warp Theme Converter
+# Generated by iTerm2 to Warp Theme Converter - https://basicsharp.github.io/iterm2-to-warp-theme-converter/
 accent: '${theme.accent}'
 background: '${theme.background}'
 foreground: '${theme.foreground}'
@@ -187,6 +236,100 @@ terminal_colors:
         };
 
         /**
+ * Parses flattened iTerm2 color format (non-XML).
+ * @param {string} content - The flattened content.
+ * @returns {object} The parsed theme object.
+ */
+        const parseFlattenedFormat = (content) => {
+            const warpTheme = {
+                terminal_colors: { normal: {}, bright: {} }
+            };
+
+            const iTermToWarpMap = {
+                'Ansi 0 Color': 'normal.black',
+                'Ansi 1 Color': 'normal.red',
+                'Ansi 2 Color': 'normal.green',
+                'Ansi 3 Color': 'normal.yellow',
+                'Ansi 4 Color': 'normal.blue',
+                'Ansi 5 Color': 'normal.magenta',
+                'Ansi 6 Color': 'normal.cyan',
+                'Ansi 7 Color': 'normal.white',
+                'Ansi 8 Color': 'bright.black',
+                'Ansi 9 Color': 'bright.red',
+                'Ansi 10 Color': 'bright.green',
+                'Ansi 11 Color': 'bright.yellow',
+                'Ansi 12 Color': 'bright.blue',
+                'Ansi 13 Color': 'bright.magenta',
+                'Ansi 14 Color': 'bright.cyan',
+                'Ansi 15 Color': 'bright.white',
+                'Background Color': 'background',
+                'Foreground Color': 'foreground',
+                'Cursor Color': 'cursor',
+                'Cursor Text Color': 'cursor_text',
+                'Selection Color': 'accent',
+                'Selected Text Color': 'selection_text',
+            };
+
+            // Split into color definitions
+            const colorMatches = content.match(/(\w[\w\s]*Color)\s+(.+?)(?=\w[\w\s]*Color|$)/g);
+
+            if (!colorMatches) {
+                throw new Error("No color definitions found in flattened format.");
+            }
+
+            for (const match of colorMatches) {
+                const parts = match.trim().split(/\s+/);
+                if (parts.length < 2) continue;
+
+                // Extract color name (everything before the components)
+                let colorName = '';
+                let componentStart = -1;
+
+                for (let i = 0; i < parts.length; i++) {
+                    if (parts[i] === 'Blue' && parts[i + 1] === 'Component') {
+                        componentStart = i;
+                        break;
+                    }
+                }
+
+                if (componentStart === -1) continue;
+
+                colorName = parts.slice(0, componentStart).join(' ');
+
+                // Extract RGB components
+                const components = parts.slice(componentStart);
+                let r, g, b;
+
+                for (let i = 0; i < components.length - 1; i++) {
+                    if (components[i] === 'Red' && components[i + 1] === 'Component' && components[i + 2]) {
+                        r = parseFloat(components[i + 2]);
+                    }
+                    if (components[i] === 'Green' && components[i + 1] === 'Component' && components[i + 2]) {
+                        g = parseFloat(components[i + 2]);
+                    }
+                    if (components[i] === 'Blue' && components[i + 1] === 'Component' && components[i + 2]) {
+                        b = parseFloat(components[i + 2]);
+                    }
+                }
+
+                if (r !== undefined && g !== undefined && b !== undefined) {
+                    const warpName = iTermToWarpMap[colorName];
+                    if (warpName) {
+                        const hexColor = toHex(r, g, b);
+                        if (warpName.includes('.')) {
+                            const [group, name] = warpName.split('.');
+                            warpTheme.terminal_colors[group][name] = hexColor;
+                        } else {
+                            warpTheme[warpName] = hexColor;
+                        }
+                    }
+                }
+            }
+
+            return warpTheme;
+        };
+
+        /**
          * Main function to handle the conversion process.
          */
         const handleConvert = () => {
@@ -197,60 +340,92 @@ terminal_colors:
             }
 
             try {
-                const parser = new DOMParser();
-                const xmlDoc = parser.parseFromString(itermXml, "application/xml");
-                
-                if (xmlDoc.getElementsByTagName("parsererror").length) {
-                    throw new Error("Invalid XML. Please check the pasted content.");
-                }
+                let warpTheme;
 
-                const keys = xmlDoc.getElementsByTagName('key');
-                const warpTheme = {
-                    terminal_colors: { normal: {}, bright: {} }
-                };
+                // Check if it's XML format or flattened format
+                if (itermXml.includes('<?xml') || itermXml.includes('<plist')) {
+                    // Handle XML format
+                    const parser = new DOMParser();
+                    const xmlDoc = parser.parseFromString(itermXml, "application/xml");
 
-                const iTermToWarpMap = {
-                    'Ansi 0 Color': 'normal.black',
-                    'Ansi 1 Color': 'normal.red',
-                    'Ansi 2 Color': 'normal.green',
-                    'Ansi 3 Color': 'normal.yellow',
-                    'Ansi 4 Color': 'normal.blue',
-                    'Ansi 5 Color': 'normal.magenta',
-                    'Ansi 6 Color': 'normal.cyan',
-                    'Ansi 7 Color': 'normal.white',
-                    'Ansi 8 Color': 'bright.black',
-                    'Ansi 9 Color': 'bright.red',
-                    'Ansi 10 Color': 'bright.green',
-                    'Ansi 11 Color': 'bright.yellow',
-                    'Ansi 12 Color': 'bright.blue',
-                    'Ansi 13 Color': 'bright.magenta',
-                    'Ansi 14 Color': 'bright.cyan',
-                    'Ansi 15 Color': 'bright.white',
-                    'Background Color': 'background',
-                    'Foreground Color': 'foreground',
-                    'Cursor Color': 'cursor',
-                    'Cursor Text Color': 'cursor_text',
-                    'Selection Color': 'accent',
-                    'Selected Text Color': 'selection_text',
-                };
+                    if (xmlDoc.getElementsByTagName("parsererror").length) {
+                        throw new Error("Invalid XML. Please check the pasted content.");
+                    }
 
-                for (const key of keys) {
-                    const keyName = key.textContent;
-                    const warpName = iTermToWarpMap[keyName];
-                    if (warpName) {
-                        const dict = key.nextElementSibling;
-                        const color = getColorFromDict(dict);
-                        if (color) {
-                            if (warpName.includes('.')) {
-                                const [group, name] = warpName.split('.');
-                                warpTheme.terminal_colors[group][name] = color;
-                            } else {
-                                warpTheme[warpName] = color;
+                    const keys = xmlDoc.getElementsByTagName('key');
+
+                    if (keys.length === 0) {
+                        throw new Error("No color definitions found. Make sure you've pasted a valid .itermcolors file.");
+                    }
+
+                    warpTheme = {
+                        terminal_colors: { normal: {}, bright: {} }
+                    };
+
+                    const iTermToWarpMap = {
+                        'Ansi 0 Color': 'normal.black',
+                        'Ansi 1 Color': 'normal.red',
+                        'Ansi 2 Color': 'normal.green',
+                        'Ansi 3 Color': 'normal.yellow',
+                        'Ansi 4 Color': 'normal.blue',
+                        'Ansi 5 Color': 'normal.magenta',
+                        'Ansi 6 Color': 'normal.cyan',
+                        'Ansi 7 Color': 'normal.white',
+                        'Ansi 8 Color': 'bright.black',
+                        'Ansi 9 Color': 'bright.red',
+                        'Ansi 10 Color': 'bright.green',
+                        'Ansi 11 Color': 'bright.yellow',
+                        'Ansi 12 Color': 'bright.blue',
+                        'Ansi 13 Color': 'bright.magenta',
+                        'Ansi 14 Color': 'bright.cyan',
+                        'Ansi 15 Color': 'bright.white',
+                        'Background Color': 'background',
+                        'Foreground Color': 'foreground',
+                        'Cursor Color': 'cursor',
+                        'Cursor Text Color': 'cursor_text',
+                        'Selection Color': 'accent',
+                        'Selected Text Color': 'selection_text',
+                    };
+
+                    for (const key of keys) {
+                        try {
+                            if (!key || !key.textContent) continue;
+
+                            const keyName = key.textContent.trim();
+                            const warpName = iTermToWarpMap[keyName];
+
+                            if (warpName) {
+                                const dict = key.nextElementSibling;
+                                const color = getColorFromDict(dict);
+                                if (color) {
+                                    if (warpName.includes('.')) {
+                                        const [group, name] = warpName.split('.');
+                                        warpTheme.terminal_colors[group][name] = color;
+                                    } else {
+                                        warpTheme[warpName] = color;
+                                    }
+                                }
                             }
+                        } catch (err) {
+                            // Skip invalid entries and continue processing
+                            console.warn('Skipping invalid color entry:', err);
+                            continue;
                         }
                     }
+                } else {
+                    // Handle flattened format
+                    warpTheme = parseFlattenedFormat(itermXml);
                 }
-                
+
+                // Check if we found any colors
+                const hasAnyColors = warpTheme.background || warpTheme.foreground ||
+                    Object.keys(warpTheme.terminal_colors.normal).length > 0 ||
+                    Object.keys(warpTheme.terminal_colors.bright).length > 0;
+
+                if (!hasAnyColors) {
+                    throw new Error("No valid colors found in the input. Please ensure you've pasted a complete .itermcolors file.");
+                }
+
                 // Set defaults for any missing essential colors
                 warpTheme.background = warpTheme.background || '#000000';
                 warpTheme.foreground = warpTheme.foreground || '#FFFFFF';
@@ -308,13 +483,13 @@ terminal_colors:
                 reader.readAsText(file);
             }
         };
-        
+
         /**
          * Copies the generated YAML to the clipboard.
          */
         const handleCopy = () => {
             if (!warpOutput.value) return;
-            
+
             // The navigator.clipboard API might not be available in all contexts,
             // so we use the older execCommand as a reliable fallback.
             const textarea = document.createElement('textarea');
@@ -326,7 +501,7 @@ terminal_colors:
             try {
                 document.execCommand('copy');
                 copyBtn.textContent = 'Copied!';
-                setTimeout(() => { 
+                setTimeout(() => {
                     copyBtn.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg> Copy to Clipboard`;
                 }, 2000);
             } catch (err) {
@@ -343,4 +518,5 @@ terminal_colors:
 
     </script>
 </body>
+
 </html>
