@@ -1,5 +1,3 @@
-# iTerm2 to Warp Theme Converter
+# [iTerm2 to Warp Theme Converter](https://basicsharp.github.io/iterm2-to-warp-theme-converter/)
 
-Instantly convert your favorite .itermcolors themes to the Warp .yml format.
-
-Created using Gemini Pro 2.5 + Canvas.
+Instantly convert your favorite .itermcolors themes to the Warp .yaml format.
