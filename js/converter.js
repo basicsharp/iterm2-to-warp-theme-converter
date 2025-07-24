@@ -24,24 +24,28 @@ const toHex = (r, g, b) => {
 const getColorFromDict = (dictElement) => {
     if (!dictElement || dictElement.tagName !== 'dict') return null;
 
-    const keys = dictElement.getElementsByTagName('key');
-    const reals = dictElement.getElementsByTagName('real');
     const color = {};
+    const children = dictElement.children;
 
-    // Ensure we have matching pairs of keys and reals
-    const minLength = Math.min(keys.length, reals.length);
+    // Parse key-value pairs in the dict
+    for (let i = 0; i < children.length - 1; i++) {
+        const keyElement = children[i];
+        const valueElement = children[i + 1];
 
-    for (let i = 0; i < minLength; i++) {
-        if (!keys[i] || !reals[i]) continue;
+        if (keyElement.tagName === 'key' && 
+            (valueElement.tagName === 'real' || valueElement.tagName === 'string')) {
+            
+            const key = keyElement.textContent;
+            const value = valueElement.textContent;
 
-        const key = keys[i].textContent;
-        const value = reals[i].textContent;
-
-        if (!key || !value) continue;
-
-        if (key === 'Red Component') color.r = value;
-        if (key === 'Green Component') color.g = value;
-        if (key === 'Blue Component') color.b = value;
+            if (key === 'Red Component' && valueElement.tagName === 'real') {
+                color.r = value;
+            } else if (key === 'Green Component' && valueElement.tagName === 'real') {
+                color.g = value;
+            } else if (key === 'Blue Component' && valueElement.tagName === 'real') {
+                color.b = value;
+            }
+        }
     }
 
     if (color.r !== undefined && color.g !== undefined && color.b !== undefined) {
@@ -138,51 +142,35 @@ const parseFlattenedFormat = (content) => {
         'Selected Text Color': 'selection_text',
     };
 
-    // Split into color definitions
-    const colorMatches = content.match(/(\w[\w\s]*Color)\s+(.+?)(?=\w[\w\s]*Color|$)/g);
+    // Improved regex to handle the specific flattened format from iTerm2 export
+    // This handles content like "Ansi 0 Color Alpha Component 1 Blue Component 0.123 Color Space Calibrated Green Component 0.456 Red Component 0.789"
+    const colorRegex = /((?:Ansi \d+|Background|Foreground|Cursor|Cursor Text|Selection|Selected Text|Badge|Bold|Link|Cursor Guide) Color)[\s\S]*?(?=(?:Ansi \d+|Background|Foreground|Cursor|Cursor Text|Selection|Selected Text|Badge|Bold|Link|Cursor Guide) Color|$)/g;
+    
+    const colorMatches = content.match(colorRegex);
 
     if (!colorMatches) {
         throw new Error("No color definitions found in flattened format.");
     }
 
     for (const match of colorMatches) {
-        const parts = match.trim().split(/\s+/);
-        if (parts.length < 2) continue;
+        // Extract color name from the beginning
+        const colorNameMatch = match.match(/^((?:Ansi \d+|Background|Foreground|Cursor|Cursor Text|Selection|Selected Text|Badge|Bold|Link|Cursor Guide) Color)/);
+        if (!colorNameMatch) continue;
+        
+        const colorName = colorNameMatch[1];
+        
+        // Extract RGB components using more flexible regex
+        const redMatch = match.match(/Red Component\s+([\d.]+)/);
+        const greenMatch = match.match(/Green Component\s+([\d.]+)/);
+        const blueMatch = match.match(/Blue Component\s+([\d.]+)/);
 
-        // Extract color name (everything before the components)
-        let colorName = '';
-        let componentStart = -1;
+        if (redMatch && greenMatch && blueMatch) {
+            const r = parseFloat(redMatch[1]);
+            const g = parseFloat(greenMatch[1]);
+            const b = parseFloat(blueMatch[1]);
 
-        for (let i = 0; i < parts.length; i++) {
-            if (parts[i] === 'Blue' && parts[i + 1] === 'Component') {
-                componentStart = i;
-                break;
-            }
-        }
-
-        if (componentStart === -1) continue;
-
-        colorName = parts.slice(0, componentStart).join(' ');
-
-        // Extract RGB components
-        const components = parts.slice(componentStart);
-        let r, g, b;
-
-        for (let i = 0; i < components.length - 1; i++) {
-            if (components[i] === 'Red' && components[i + 1] === 'Component' && components[i + 2]) {
-                r = parseFloat(components[i + 2]);
-            }
-            if (components[i] === 'Green' && components[i + 1] === 'Component' && components[i + 2]) {
-                g = parseFloat(components[i + 2]);
-            }
-            if (components[i] === 'Blue' && components[i + 1] === 'Component' && components[i + 2]) {
-                b = parseFloat(components[i + 2]);
-            }
-        }
-
-        if (r !== undefined && g !== undefined && b !== undefined) {
             const warpName = iTermToWarpMap[colorName];
-            if (warpName) {
+            if (warpName && !isNaN(r) && !isNaN(g) && !isNaN(b)) {
                 const hexColor = toHex(r, g, b);
                 if (warpName.includes('.')) {
                     const [group, name] = warpName.split('.');
