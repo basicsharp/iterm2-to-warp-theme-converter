@@ -89,6 +89,14 @@ const handleCopy = () => {
 };
 
 /**
+ * Updates the convert button state based on input content.
+ */
+const updateConvertButtonState = () => {
+    const hasContent = itermInput.value.trim().length > 0;
+    convertBtn.disabled = !hasContent;
+};
+
+/**
  * Initialize the application when the DOM is loaded.
  */
 const initializeApp = () => {
@@ -96,9 +104,13 @@ const initializeApp = () => {
     convertBtn.addEventListener('click', handleConvert);
     fileUpload.addEventListener('change', handleFileUpload);
     copyBtn.addEventListener('click', handleCopy);
+    itermInput.addEventListener('input', updateConvertButtonState);
     
     // Clear any initial status messages
     showStatus('', 'success');
+    
+    // Set initial button state
+    updateConvertButtonState();
 };
 
 // Initialize the app when the DOM is fully loaded

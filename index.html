@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>iTerm2 to Warp Theme Converter</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.tailwindcss.com/3.4.1"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
@@ -34,6 +34,22 @@
             color: #60a5fa;
             /* Tailwind 'blue-400' */
         }
+
+        .kbd {
+            background-color: #374151;
+            /* bg-gray-700 */
+            font-size: 0.75rem;
+            /* text-xs */
+            line-height: 1rem;
+            border-radius: 0.375rem;
+            /* rounded-md */
+            padding: 0.125rem 0.25rem;
+            /* px-1 py-0.5 */
+            border-bottom: 1px solid #6b7280;
+            /* border-b border-gray-500 */
+            font-family: 'Fira Code', monospace;
+            display: inline-block;
+        }
     </style>
 </head>
 
@@ -52,10 +68,10 @@
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
                 <!-- Input Column -->
                 <div class="flex flex-col space-y-4">
-                    <div class="flex justify-between items-center">
+                    <div class="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-3">
                         <h2 class="text-xl font-semibold text-white">1. Input iTerm2 Theme</h2>
                         <label for="file-upload"
-                            class="cursor-pointer text-sm bg-indigo-600 hover:bg-indigo-700 text-white font-medium py-2 px-4 rounded-lg transition-colors duration-200">
+                            class="cursor-pointer text-sm bg-indigo-600 hover:bg-indigo-700 text-white font-medium py-2 px-4 rounded-lg transition-colors duration-200 text-center sm:text-left">
                             Upload .itermcolors
                         </label>
                         <input id="file-upload" type="file" class="hidden" accept=".itermcolors">
@@ -67,8 +83,8 @@
                     <textarea id="iterm-input"
                         class="w-full h-96 flex-grow bg-gray-900 border border-gray-600 rounded-lg p-4 text-sm focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition"
                         placeholder="Paste your .itermcolors XML content here..."></textarea>
-                    <button id="convert-btn"
-                        class="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-4 rounded-lg transition-colors duration-200 text-lg flex items-center justify-center">
+                    <button id="convert-btn" disabled
+                        class="w-full bg-green-600 hover:bg-green-700 disabled:bg-green-900 disabled:cursor-not-allowed text-white font-bold py-3 px-4 rounded-lg transition-colors duration-200 text-lg flex items-center justify-center">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                             class="mr-2">
@@ -117,13 +133,21 @@
                     <code class="bg-gray-700 text-xs rounded-md px-1">~/.warp/themes/</code>.
                 </li>
                 <li>Paste the copied content into the new file and save.</li>
-                <li>Open Warp's settings (Cmd+,), go to Appearance, and select your new theme!</li>
+                <li>Open Warp's settings (<kbd class="kbd">Cmd</kbd>+<kbd class="kbd">,</kbd>), go to Appearance, and
+                    select your new theme!</li>
             </ol>
         </div>
     </main>
 
     <footer class="text-center p-4 text-gray-500 text-sm">
-        <p>Vibed with ❤️ by <a href="https://github.com/basicsharp">Porramate Lim</a>.</p>
+        <div class="flex flex-wrap items-center justify-center gap-x-2 gap-y-2">
+            <span>Vibed with ❤️ by <a href="https://github.com/basicsharp">Porramate Lim</a>.</span>
+            <a href="https://github.com/basicsharp/iterm2-to-warp-theme-converter" target="_blank"
+                rel="noopener noreferrer">
+                <img src="https://img.shields.io/github/stars/basicsharp/iterm2-to-warp-theme-converter?style=social"
+                    alt="GitHub stars" class="inline-block">
+            </a>
+        </div>
     </footer>
 
     <!-- Core conversion logic -->
